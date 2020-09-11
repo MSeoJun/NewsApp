@@ -1,30 +1,28 @@
 import React from "react";
 import { Container, Header, Tab, Tabs, Body, Title } from "native-base";
-import TabOne from "./Tabs/tabOne";
+import Tab1 from "./Tabs/tabOne";
 import Tab2 from "./Tabs/tabTwo";
 import Tab3 from "./Tabs/tabThree";
 
-function TabScreen() {
+export default function TabScreen() {
   return (
     <Container>
       <Header hasTabs>
         <Body>
-          <Title>Hello</Title>
+          <Title>News</Title>
         </Body>
       </Header>
       <Tabs>
-        <Tab heading="Tab1">
-          <TabOne />
+        <Tab heading="엔터테이먼트">
+          <Tab1 />
         </Tab>
-        <Tab heading="Tab2">
+        <Tab heading="스포츠">
           <Tab2 />
         </Tab>
-        <Tab heading="Tab3">
+        <Tab heading="건강">
           <Tab3 />
         </Tab>
       </Tabs>
     </Container>
   );
 }
-
-export default TabScreen;

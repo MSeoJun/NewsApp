@@ -1,9 +1,16 @@
 import React from "react";
 import moment from "moment";
 import { ListItem, Thumbnail, Left, Body, Right, Button } from "native-base";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
-function DataItem({ article }) {
+export default function DataItem({ article, handleModalOpen }) {
+  const viewModal = () => {
+    handleModalOpen({
+      title: article.title,
+      url: article.url,
+    });
+  };
+
   return (
     <ListItem thumbnail>
       <Left>
@@ -23,18 +30,14 @@ function DataItem({ article }) {
         </Text>
         <View style={{ flex: 1, flexDirection: "row", marginTop: 10 }}>
           <Text note>{article.source.name}</Text>
-          <Text note>
-            {moment(article.publishedAt || moment.now).fromNow()}
-          </Text>
+          <Text note>{moment(article.publishedAt || moment.now).fromNow()}</Text>
         </View>
       </Body>
       <Right>
-        <Button transparent>
+        <Button transparent onPress={viewModal}>
           <Text>보기</Text>
         </Button>
       </Right>
     </ListItem>
   );
 }
-
-export default DataItem;

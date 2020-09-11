@@ -6,6 +6,7 @@ import TabScreen from "./components/TabScreen";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const loadFont = async () => {
       await Font.loadAsync({
@@ -18,9 +19,10 @@ export default function App() {
       setIsLoading(false);
     });
   }, []);
+
   if (!isLoading) {
     return <TabScreen />;
   } else {
-    return <Text>얄루</Text>;
+    return <Text></Text>;
   }
 }
