@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalView from "../ModalView";
-import { getHealth } from "../../api/news";
+import { getArticles } from "../../api/news";
 import DataItem from "../DataItem";
 import { Container, Content, List } from "native-base";
 import { Text, View, ActivityIndicator } from "react-native";
@@ -26,7 +26,7 @@ export default function tabThree() {
 
   useEffect(() => {
     async function get_articles() {
-      setArticles(await getHealth());
+      setArticles(await getArticles('Health'));
       setIsLoading(false);
     }
 

@@ -38,8 +38,8 @@ function ModalView({ viewModal, articleData, onClose }) {
             <Title>{articleData.title}</Title>
           </Body>
           <Right>
-            <Button onPress={handleShare}>
-              <Icon name="share" transparent />
+            <Button onPress={handleShare} transparent>
+              <Icon name="share"  />
             </Button>
           </Right>
         </Header>
