@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Container,
-  Header,
-  Content,
-  Tab,
-  Tabs,
-  Body,
-  Title,
-} from "native-base";
-import Tab1 from "./Tabs/tabOne";
+import { Container, Header, Tab, Tabs, Body, Title } from "native-base";
+import TabOne from "./Tabs/tabOne";
 import Tab2 from "./Tabs/tabTwo";
 import Tab3 from "./Tabs/tabThree";
 
@@ -22,7 +14,7 @@ function TabScreen() {
       </Header>
       <Tabs>
         <Tab heading="Tab1">
-          <Tab1 />
+          <TabOne />
         </Tab>
         <Tab heading="Tab2">
           <Tab2 />

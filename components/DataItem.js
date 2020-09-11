@@ -1,29 +1,9 @@
 import React from "react";
-// import * as Font from "expo-font";
-// import { Ionicons } from "@expo/vector-icons";
-import {
-  ListItem,
-  Thumbnail,
-  Text,
-  Left,
-  Body,
-  Right,
-  Button,
-} from "native-base";
+import moment from "moment";
+import { ListItem, Thumbnail, Left, Body, Right, Button } from "native-base";
+import { Text } from "react-native";
 
 function DataItem({ article }) {
-  //   useEffect(() => {
-  //     const loadFont = async () => {
-  //       await Font.loadAsync({
-  //         Roboto: require("native-base/Fonts/Roboto.ttf"),
-  //         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-  //         ...Ionicons.font,
-  //       });
-  //     };
-
-  //     loadFont();
-  //   }, []);
-
   return (
     <ListItem thumbnail>
       <Left>
@@ -37,11 +17,16 @@ function DataItem({ article }) {
         />
       </Left>
       <Body>
-        <Text>제목</Text>
         <Text numberOfLines={2}>{article.title}</Text>
         <Text note numberOfLines={2}>
           {article.description}
         </Text>
+        <View style={{ flex: 1, flexDirection: "row", marginTop: 10 }}>
+          <Text note>{article.source.name}</Text>
+          <Text note>
+            {moment(article.publishedAt || moment.now).fromNow()}
+          </Text>
+        </View>
       </Body>
       <Right>
         <Button transparent>
