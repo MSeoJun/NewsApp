@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from "react";
 import ModalView from "../ModalView";
-import { getArticles } from "../../api/news";
 import DataItem from "../DataItem";
 import { Container, Content, List } from "native-base";
 import { Text, View, ActivityIndicator } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function tabOne() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [articles, setArticles] = useState([]);
-
   const [viewModal, setViewModal] = useState(false);
   const [modalArticleData, setModalArticleData] = useState({});
+
+  const dispatch = useDispatch();
+  const { isLoading, articles } = useSelector((state) => {
+    return {
+      isLoading: state.isLoading,
+      articles: state.sports,
+    };
+  });
+
+  useEffect(() => {
+    dispatch({ type: "CLICK", category: "sports" });
+  }, []);
 
   // 모달열기
   const handleModalOpen = (articleData) => {
@@ -23,15 +32,6 @@ export default function tabOne() {
     setViewModal(false);
     setModalArticleData({});
   };
-
-  useEffect(() => {
-    async function get_articles() {
-      setArticles(await getArticles('entertainment'));
-      setIsLoading(false);
-    }
-
-    get_articles();
-  }, []);
 
   const pageView = isLoading ? (
     <View>
