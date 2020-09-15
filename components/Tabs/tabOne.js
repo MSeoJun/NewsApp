@@ -26,7 +26,7 @@ export default function tabOne() {
 
   useEffect(() => {
     async function get_articles() {
-      setArticles(await getArticles());
+      setArticles(await getArticles('entertainment'));
       setIsLoading(false);
     }
 
