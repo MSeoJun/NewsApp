@@ -13,13 +13,13 @@ export default function TabScreen() {
         </Body>
       </Header>
       <Tabs>
-        <Tab heading="엔터테이먼트">
+        <Tab heading="스포츠">
           <Tab1 />
         </Tab>
-        <Tab heading="스포츠">
+        <Tab heading="건강">
           <Tab2 />
         </Tab>
-        <Tab heading="건강">
+        <Tab heading="엔터테이먼트">
           <Tab3 />
         </Tab>
       </Tabs>
