@@ -19,7 +19,7 @@ export default function tabOne() {
 
   useEffect(() => {
     dispatch({ type: "CLICK", category: "sports" });
-  }, []);
+  }, [dispatch]);
 
   // 모달열기
   const handleModalOpen = (articleData) => {
