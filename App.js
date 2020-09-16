@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import TabScreen from "./components/TabScreen";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import Login from "./pages/Login";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,8 @@ export default function App() {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <TabScreen />
+          {/* <TabScreen /> */}
+          <Login />
         </View>
       </Provider>
     );
