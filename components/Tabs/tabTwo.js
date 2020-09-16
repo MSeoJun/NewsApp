@@ -19,7 +19,7 @@ export default function tabTwo() {
 
   useEffect(() => {
     dispatch({ type: "CLICK", category: "health" });
-  }, []);
+  }, [dispatch]);
 
   // 모달열기
   const handleModalOpen = (articleData) => {

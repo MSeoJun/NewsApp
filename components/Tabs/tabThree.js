@@ -19,7 +19,7 @@ export default function tabThree() {
 
   useEffect(() => {
     dispatch({ type: "CLICK", category: "entertainment" });
-  }, []);
+  }, [dispatch]);
 
   // 모달열기
   const handleModalOpen = (articleData) => {
