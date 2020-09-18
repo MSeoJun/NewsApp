@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import TabScreen from "./components/TabScreen";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import Login from "./pages/Login";
+import Routes from "./Routes";
+import TapScreen from "./components/TabScreen";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,10 +26,8 @@ export default function App() {
   if (!isLoading) {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          {/* <TabScreen /> */}
-          <Login />
-        </View>
+        <Routes />
+        {/* <TapScreen /> */}
       </Provider>
     );
   } else {
