@@ -1,79 +1,107 @@
 import React, { useState } from "react";
 import {
+  View,
   Text,
   StyleSheet,
-  View,
   Image,
   TextInput,
   TouchableOpacity,
   Alert,
 } from "react-native";
-import * as userApi from "../api/user";
+import { getUsers } from "../api/user";
+import { Actions } from "react-native-router-flux";
 
-export default function Login() {
+function Login() {
+  const [isClicked, setIsClicked] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
 
-  const [isClick, setIsClick] = useState(false);
-
-  const LoginAction = async () => {
-    setIsClick(true);
+  const onSubmit = async () => {
+    setIsClicked(true);
 
     if (userInfo.email && userInfo.password) {
-      const users = await userApi.getUsers();
+      const userList = await getUsers();
+      const user = userList.filter(
+        (user) => user.email === userInfo.email && user.password === userInfo.password
+      );
 
-      const matchData = users.filter((user) => {
-        return user.email === userInfo.email && user.password === userInfo.password;
-      });
-
-      if (matchData.length) {
-        Alert.alert("성공, 로그인 성공!");
+      if (!user.length) {
+        alert("Failed");
       } else {
-        Alert.alert("실패, 이메일과 비밀번호를 다시 입력해주세요.");
+        Alert.alert("로그인 성공", JSON.stringify(user));
+        // 로그인 성공시 뉴스 페이지로 이동
+        // Alert.alert("로그인 성공", JSON.stringify(user), [
+        //   {
+        //     text: "OK",
+        //     onPress: () => Actions.newsList(),
+        //   },
+        // ]);
       }
     }
   };
 
+  const moveSignup = () => {
+    Actions.register();
+  };
   return (
     <>
-      <View style={styles.LogoContainer}>
-        <Image
-          source={require("../assets/logo.png")}
-          style={{ width: 100, height: 100 }}
-        />
-        <Text style={{ padding: 30, fontSize: 30 }}>로그인</Text>
+      <View style={styles.logoContainer}>
+        <Image source={require("../assets/logo.png")} style={{ width: 90, height: 90 }} />
+        <Text style={{ marginTop: 15 }}>Welcome to my app</Text>
       </View>
-      <View style={styles.Container}>
-        <Text style={styles.Text}>Email</Text>
+      <View style={styles.formContainer}>
+        <Text style={{ width: 300, fontWeight: "500" }}>Email</Text>
         <TextInput
-          style={styles.InputBox}
+          style={styles.inputBox}
+          backgroundColor="silver"
+          underlineColorAndroid="rgba(0,0,0,0)"
           placeholder="Email"
           placeholderTextColor="#ffffff"
-          underlineColorAndroid="rgba(0,0,0,0)"
           keyboardType="email-address"
-          onChangeText={(text) => setUserInfo({ ...userInfo, email: text })}
+          selectionColor="#fff"
+          onChangeText={(text) =>
+            setUserInfo(() => {
+              return {
+                ...userInfo,
+                email: text,
+              };
+            })
+          }
         />
-        {isClick && userInfo.email === "" ? (
-          <Text style={{ color: "red" }}>Email을 입력해주세요</Text>
+        {isClicked && userInfo.email === "" ? (
+          <Text style={{ color: "red" }}>Email 을 입력해주십시오.</Text>
         ) : null}
-
-        <Text style={styles.Text}>Password</Text>
+        <Text style={{ width: 300, fontWeight: "500" }}>Password</Text>
         <TextInput
-          style={styles.InputBox}
+          style={styles.inputBox}
+          backgroundColor="silver"
+          underlineColorAndroid="rgba(0,0,0,0)"
           placeholder="Password"
           placeholderTextColor="#ffffff"
-          underlineColorAndroid="rgba(0,0,0,0)"
-          keyboardType="email-address"
-          onChangeText={(text) => setUserInfo({ ...userInfo, password: text })}
           secureTextEntry
+          selectionColor="#fff"
+          onChangeText={(text) =>
+            setUserInfo(() => {
+              return {
+                ...userInfo,
+                password: text,
+              };
+            })
+          }
         />
-        {isClick && userInfo.password === "" ? (
-          <Text style={{ color: "red" }}>Password를 입력해주세요</Text>
+        {isClicked && userInfo.password === "" ? (
+          <Text style={{ color: "red" }}>Password 를 입력해주십시오.</Text>
         ) : null}
-        <TouchableOpacity style={styles.Button} onPress={LoginAction}>
-          <Text style={styles.ButtonText}>로그인</Text>
+        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.bottomText}>
+        <Text>Don't have account yet?</Text>
+        <TouchableOpacity onPress={moveSignup}>
+          <Text style={{ paddingLeft: 10 }}>SignUp</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -81,42 +109,45 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  LogoContainer: {
+  logoContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  formContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  Container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  InputBox: {
+  inputBox: {
     width: 300,
     height: 50,
-    backgroundColor: "silver",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     borderRadius: 25,
     paddingHorizontal: 16,
-    color: "#ffffff",
     fontSize: 16,
+    color: "#ffffff",
     marginVertical: 5,
   },
-  Text: {
-    width: 300,
-    fontWeight: "700",
-    paddingBottom: 10,
-    paddingTop: 10,
-    fontSize: 16,
-  },
-  Button: {
-    width: 300,
+  button: {
     backgroundColor: "#1c313a",
+    width: 300,
     marginVertical: 10,
     paddingVertical: 13,
     borderRadius: 25,
   },
-  ButtonText: {
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "500",
     color: "#ffffff",
     textAlign: "center",
   },
+  bottomText: {
+    flexGrow: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
+
+export default Login;
