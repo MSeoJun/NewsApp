@@ -16,18 +16,19 @@ function Register() {
   const registUser = async () => {
     setIsClick(true);
 
-    if (userInfo.name && userInfo.email && userInfo.password) {
-      await userApi.createUser(userInfo);
+    // if (userInfo.name && userInfo.email && userInfo.password) {
+    //   await userApi.createUser(userInfo);
 
-      // 그냥 alert 를 호출하고 라우터를 적용하면 팝업은 뜬 상태로 페이지 이동이 먼저 처리되기 때문에
-      // 버튼 옵션을 넣어 버튼 클릭시 페이지 이동이 이루어지도록 한다.
-      Alert.alert("사용자 등록 완료", "로그인 페이지로 이동합니다.", [
-        {
-          text: "OK",
-          onPress: () => Actions.login(),
-        },
-      ]);
-    }
+    //   // 그냥 alert 를 호출하고 라우터를 적용하면 팝업은 뜬 상태로 페이지 이동이 먼저 처리되기 때문에
+    //   // 버튼 옵션을 넣어 버튼 클릭시 페이지 이동이 이루어지도록 한다.
+    //   Alert.alert("사용자 등록 완료", "로그인 페이지로 이동합니다.", [
+    //     {
+    //       text: "OK",
+    //       onPress: () => Actions.login(),
+    //     },
+    //   ]);
+    // }
+    Actions.login();
   };
 
   return (

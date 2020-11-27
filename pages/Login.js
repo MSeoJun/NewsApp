@@ -21,25 +21,26 @@ function Login() {
   const onSubmit = async () => {
     setIsClicked(true);
 
-    if (userInfo.email && userInfo.password) {
-      const userList = await getUsers();
-      const user = userList.filter(
-        (user) => user.email === userInfo.email && user.password === userInfo.password
-      );
+    // if (userInfo.email && userInfo.password) {
+    //   const userList = await getUsers();
+    //   const user = userList.filter(
+    //     (user) => user.email === userInfo.email && user.password === userInfo.password
+    //   );
 
-      if (!user.length) {
-        alert("Failed");
-      } else {
-        Alert.alert("로그인 성공", JSON.stringify(user));
-        // 로그인 성공시 뉴스 페이지로 이동
-        // Alert.alert("로그인 성공", JSON.stringify(user), [
-        //   {
-        //     text: "OK",
-        //     onPress: () => Actions.newsList(),
-        //   },
-        // ]);
-      }
-    }
+    //   if (!user.length) {
+    //     alert("Failed");
+    //   } else {
+    //     // Alert.alert("로그인 성공", JSON.stringify(user));
+    //     // 로그인 성공시 뉴스 페이지로 이동
+    //     Alert.alert("로그인 성공", JSON.stringify(user), [
+    //       {
+    //         text: "OK",
+    //         onPress: () => Actions.newsList(),
+    //       },
+    //     ]);
+    //   }
+    // }
+    Actions.newsList();
   };
 
   const moveSignup = () => {
@@ -49,7 +50,7 @@ function Login() {
     <>
       <View style={styles.logoContainer}>
         <Image source={require("../assets/logo.png")} style={{ width: 90, height: 90 }} />
-        <Text style={{ marginTop: 15 }}>Welcome to my app</Text>
+        <Text style={{ marginTop: 15, marginBottom: 55 }}>Welcome to my app</Text>
       </View>
       <View style={styles.formContainer}>
         <Text style={{ width: 300, fontWeight: "500" }}>Email</Text>

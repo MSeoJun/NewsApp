@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import Routes from "./Routes";
 import TapScreen from "./components/TabScreen";
+import Jobs from "./pages/Jobs";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +29,7 @@ export default function App() {
       <Provider store={store}>
         <Routes />
         {/* <TapScreen /> */}
+        {/* <Jobs /> */}
       </Provider>
     );
   } else {
